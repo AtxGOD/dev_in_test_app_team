@@ -21,10 +21,9 @@ def android_get_desired_capabilities():
 def get_udid():
     udid = subprocess.run(['adb', 'devices'], capture_output=True, text=True).stdout
     udid = udid.split('\n')[1].split('\t')[0]
-    '-s 52b074f7d940 shell getprop'
     return udid
 
 
 def get_platform_version():
-    return subprocess.run(['adb', '-s', '52b074f7d940', 'shell', 'getprop', 'ro.build.version.release'],
+    return subprocess.run(['adb', '-s', get_udid(), 'shell', 'getprop', 'ro.build.version.release'],
                                       capture_output=True, text=True).stdout
